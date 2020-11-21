@@ -7,41 +7,130 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="favicon.png">
-    <title>emoji-picker Demo</title>
+    <title>Unicode Emoji Picker Demo</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <!-- Begin emoji-picker Stylesheets -->
     <link href="../lib/css/emoji.css" rel="stylesheet">
-    <!-- End emoji-picker Stylesheets -->
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            color: #fff;
+            background-color: #31b0d5;
+        }
+
+        .container {
+            width: 80%;
+            background: #f8f9fa url(bg.png) fixed center no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p {
+            min-width: 350px;
+            display: inline-block;
+        }
+
+        .emoji-menu-place {
+            min-width: 220px;
+            position: relative;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        #emojiMenuPlaceSelector {
+            position: relative;
+        }
+
+        span {
+            margin-bottom: 20px;
+            display: inline-block;
+            color: #3f3f3f;
+        }
+
+        .result {
+            margin-bottom: 30px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 100%;
+            }
+
+            p {
+                min-width: unset;
+            }
+        }
+    </style>
 </head>
 <body>
 
 
+<div class="container">
+    <div class="result"></div>
+    <div>
+        <p>Trigger (open/close) with selector: </p>
+        <button id="open_emoji_box" class="btn emoji-picker">Trigger Emoji Menu</button>
+    </div>
+    <div>
+        <p>Trigger (open/close) with onClick event:</p>
+        <button onclick="$.triggerEmojiMenu()" class="btn emoji-picker">Trigger Emoji Menu</button>
+    </div>
 
-<div id="btn">
-    <button id="open_emoji_box" class="emoji-picker">Open</button>
+    <div class="emoji-menu-place">
+        <span>Emoji Menu location</span>
+        <div id="emojiMenuPlaceSelector"></div>
+    </div>
 </div>
 
-<br><br><br>
-
-<div id="emoji_menu"></div>
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Begin emoji-picker JavaScript -->
 <script src="../lib/js/config.js"></script>
 <script src="../lib/js/emoji-picker.js"></script>
-<!-- End emoji-picker JavaScript -->
 
 <script>
     $(function () {
         window.emojiPicker = new EmojiPicker({
             assetsPath: '../lib/img/',
-            trigger_button : $("#open_emoji_box"),
-            emoji_menu : $("#emoji_menu"),
-            result: function (res) {
-                alert(JSON.stringify(res, null, 4));
+            triggerButton: $("#open_emoji_box"),
+            emojiMenuPlace: $("#emojiMenuPlaceSelector"),
+            dontHideOnClick: 'emoji-picker', //class name
+            emojiResult: function (res) {
+                // alert(JSON.stringify(res, null, 4));
+                console.log(res);
+                $('.result').text($('.result').text() + res.unicode + " ")
             }
         });
         window.emojiPicker.discover();
