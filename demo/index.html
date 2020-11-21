@@ -70,7 +70,7 @@
             text-align: center;
         }
 
-        #emojiMenuPlaceSelector {
+        #emojiMenuPlace {
             position: relative;
         }
 
@@ -102,7 +102,7 @@
     <div class="result"></div>
     <div>
         <p>Trigger (open/close) with selector: </p>
-        <button id="open_emoji_box" class="btn emoji-picker">Trigger Emoji Menu</button>
+        <button id="triggerButton" class="btn emoji-picker">Trigger Emoji Menu</button>
     </div>
     <div>
         <p>Trigger (open/close) with onClick event:</p>
@@ -111,7 +111,7 @@
 
     <div class="emoji-menu-place">
         <span>Emoji Menu location</span>
-        <div id="emojiMenuPlaceSelector"></div>
+        <div id="emojiMenuPlace"></div>
     </div>
 </div>
 
@@ -124,8 +124,8 @@
     $(function () {
         window.emojiPicker = new EmojiPicker({
             assetsPath: '../lib/img/',
-            triggerButton: $("#open_emoji_box"),
-            emojiMenuPlace: $("#emojiMenuPlaceSelector"),
+            triggerButton: $("#triggerButton"),
+            emojiMenuPlace: $("#emojiMenuPlace"),
             dontHideOnClick: 'emoji-picker', //class name
             emojiResult: function (res) {
                 // alert(JSON.stringify(res, null, 4));
