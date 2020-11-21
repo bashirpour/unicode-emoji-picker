@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.png">
+    <title>emoji-picker Demo</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Begin emoji-picker Stylesheets -->
+    <link href="../lib/css/emoji.css" rel="stylesheet">
+    <!-- End emoji-picker Stylesheets -->
+</head>
+<body>
+
+
+
+<div id="btn">
+    <button id="open_emoji_box" class="emoji-picker">Open</button>
+</div>
+
+<br><br><br>
+
+<div id="emoji_menu"></div>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Begin emoji-picker JavaScript -->
+<script src="../lib/js/config.js"></script>
+<script src="../lib/js/emoji-picker.js"></script>
+<!-- End emoji-picker JavaScript -->
+
+<script>
+    $(function () {
+        window.emojiPicker = new EmojiPicker({
+            assetsPath: '../lib/img/',
+            trigger_button : $("#open_emoji_box"),
+            emoji_menu : $("#emoji_menu"),
+            result: function (res) {
+                alert(JSON.stringify(res, null, 4));
+            }
+        });
+        window.emojiPicker.discover();
+    });
+</script>
+</body>
+</html>
